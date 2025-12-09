@@ -12,7 +12,8 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'reverb'),
+    'default' => env('BROADCAST_DRIVER', 'log'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -63,6 +64,8 @@ return [
         | 🎧 Reverb Connection (Realtime Laravel)
         |--------------------------------------------------------------------------
         */
+
+        /*
         'reverb' => [
             'driver' => 'pusher', // Reverb memakai protocol Pusher
             'key' => env('REVERB_APP_KEY'),
@@ -75,7 +78,7 @@ return [
                 'useTLS' => false,
             ],
         ],
-
+*/
     ],
 
 ];
