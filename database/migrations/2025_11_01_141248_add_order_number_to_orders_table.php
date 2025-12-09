@@ -7,15 +7,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->string('order_number')->nullable()->unique()->after('id');
-        });
+        // Cegah error SQLite & CI: jangan tambah kolom kalau sudah ada
+        if (!Schema::hasColumn('orders', 'order_number')) {
+            Schema::table('orders', function (Blueprint $table) {
+                $table->string('order_number')
+                    ->nullable()
+                    ->after('id');
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('order_number');
-        });
+        // Hapus kolom hanya jika exist (aman untuk CI & SQLite)
+        if (Schema::hasColumn('orders', 'order_number')) {
+            Schema::table('orders', function (Blueprint $table) {
+                $table->dropColumn('order_number');
+            });
+        }
     }
 };
